@@ -21,9 +21,9 @@
 # IN THE SOFTWARE.
 #
 try:
-    from cStringIO import StringIO
+    from io import StringIO
 except ImportError:
-    from StringIO import StringIO
+    from io import StringIO
 
 import mock
 from tests.unit import unittest

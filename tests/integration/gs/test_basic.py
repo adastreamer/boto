@@ -30,7 +30,7 @@ Some integration tests for the GSConnection
 
 import os
 import re
-import StringIO
+import io
 import xml.sax
 
 from boto import handler
@@ -100,10 +100,10 @@ class GSBasicTest(GSTestCase):
         self.assertEqual(s1, fp.read())
         fp.close()
         # check to make sure set_contents_from_file is working
-        sfp = StringIO.StringIO('foo')
+        sfp = io.StringIO('foo')
         k.set_contents_from_file(sfp)
         self.assertEqual(k.get_contents_as_string(), 'foo')
-        sfp2 = StringIO.StringIO('foo2')
+        sfp2 = io.StringIO('foo2')
         k.set_contents_from_file(sfp2)
         self.assertEqual(k.get_contents_as_string(), 'foo2')
 
@@ -189,7 +189,7 @@ class GSBasicTest(GSTestCase):
         k.set_metadata(mdkey2, mdval2)
 
         # Test unicode character.
-        mdval3 = u'föö'
+        mdval3 = 'föö'
         mdkey3 = 'meta3'
         k.set_metadata(mdkey3, mdval3)
         k.set_contents_from_string(s1)

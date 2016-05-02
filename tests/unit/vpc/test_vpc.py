@@ -70,7 +70,7 @@ class TestVPCConnection(unittest.TestCase):
         self.vpc_connection.get_status = get_status
         status = self.vpc_connection.detach_internet_gateway(
             internet_gateway_id, vpc_id)
-        self.assertEquals(True, status)
+        self.assertEqual(True, status)
 
 
 if __name__ == '__main__':

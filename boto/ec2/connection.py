@@ -158,7 +158,7 @@ class EC2Connection(AWSQueryConnection):
             if base_keys is None:
                 base_keys = []
             if isinstance(dct, dict):
-                for key, value in dct.items():
+                for key, value in list(dct.items()):
                     for path, val in traverse_dict(value, base_keys + [key]):
                         yield path, val
             else:
@@ -2599,7 +2599,7 @@ class EC2Connection(AWSQueryConnection):
         """
         try:
             return self.get_all_key_pairs(keynames=[keyname])[0]
-        except self.ResponseError, e:
+        except self.ResponseError as e:
             if e.code == 'InvalidKeyPair.NotFound':
                 return None
             else:

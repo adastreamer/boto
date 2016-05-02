@@ -55,10 +55,10 @@ class TestImportImage(BaseTestImportExport):
         }, self.ignore_params_values)
 
         self.assertIsInstance(task, ImportImageTask)
-        self.assertEquals(task.id, self.TASK_ID)
-        self.assertEquals(len(task.snapshot_details), 2)
-        self.assertEquals(task.snapshot_details[0].snapshot_id, "i-snapshot1")
-        self.assertEquals(task.snapshot_details[1].snapshot_id, "i-snapshot2")
+        self.assertEqual(task.id, self.TASK_ID)
+        self.assertEqual(len(task.snapshot_details), 2)
+        self.assertEqual(task.snapshot_details[0].snapshot_id, "i-snapshot1")
+        self.assertEqual(task.snapshot_details[1].snapshot_id, "i-snapshot2")
 
     def test_describe_import_image_tasks(self):
         self.set_http_response(status_code=200)
@@ -68,10 +68,10 @@ class TestImportImage(BaseTestImportExport):
             "ImportTaskId.1": "i-task"
         }, self.ignore_params_values)
 
-        self.assertEquals(len(tasks), 1)
+        self.assertEqual(len(tasks), 1)
         task = tasks[0]
         self.assertIsInstance(task, ImportImageTask)
-        self.assertEquals(task.id, self.TASK_ID)
+        self.assertEqual(task.id, self.TASK_ID)
 
     def test_cancel_import_task(self):
         self.set_http_response(status_code=200)
@@ -81,7 +81,7 @@ class TestImportImage(BaseTestImportExport):
             "ImportTaskId": "i-task"
         }, self.ignore_params_values)
 
-        self.assertEquals(task.importTaskId, self.TASK_ID)
+        self.assertEqual(task.importTaskId, self.TASK_ID)
 
 
 class TestImportSnapshot(BaseTestImportExport):
@@ -114,8 +114,8 @@ class TestImportSnapshot(BaseTestImportExport):
         }, self.ignore_params_values)
 
         self.assertIsInstance(task, ImportSnapshotTask)
-        self.assertEquals(task.id, self.TASK_ID)
-        self.assertEquals(task.snapshot_id, "i-snapshot1")
+        self.assertEqual(task.id, self.TASK_ID)
+        self.assertEqual(task.snapshot_id, "i-snapshot1")
 
     def test_describe_import_snapshot_tasks(self):
         self.set_http_response(status_code=200)
@@ -128,11 +128,11 @@ class TestImportSnapshot(BaseTestImportExport):
             "ImportTaskId.1": "i-task"
         }, self.ignore_params_values)
 
-        self.assertEquals(len(tasks), 1)
+        self.assertEqual(len(tasks), 1)
         task = tasks[0]
         self.assertIsInstance(task, ImportSnapshotTask)
-        self.assertEquals(task.id, self.TASK_ID)
-        self.assertEquals(task.snapshot_id, "i-snapshot1")
+        self.assertEqual(task.id, self.TASK_ID)
+        self.assertEqual(task.snapshot_id, "i-snapshot1")
 
 
 class TestExportTasks(BaseTestImportExport):
@@ -171,8 +171,8 @@ class TestExportTasks(BaseTestImportExport):
         }, self.ignore_params_values)
 
         self.assertIsInstance(task, ExportTask)
-        self.assertEquals(task.id, self.TASK_ID)
-        self.assertEquals(task.instance_id, "i-instance")
+        self.assertEqual(task.id, self.TASK_ID)
+        self.assertEqual(task.instance_id, "i-instance")
 
 
     def test_describe_export_tasks(self):
@@ -183,15 +183,15 @@ class TestExportTasks(BaseTestImportExport):
             "ExportTaskId.1": "i-task"
         }, self.ignore_params_values)
 
-        self.assertEquals(len(tasks), 1)
+        self.assertEqual(len(tasks), 1)
         task = tasks[0]
         self.assertIsInstance(task, ExportTask)
-        self.assertEquals(task.id, self.TASK_ID)
-        self.assertEquals(task.instance_id, "i-instance")
-        self.assertEquals(len(task.volume_export_details), 1)
+        self.assertEqual(task.id, self.TASK_ID)
+        self.assertEqual(task.instance_id, "i-instance")
+        self.assertEqual(len(task.volume_export_details), 1)
         volume = task.volume_export_details[0]
         self.assertIsInstance(volume, ExportVolumeTask)
-        self.assertEquals(volume.volume_id, "i-volume")
+        self.assertEqual(volume.volume_id, "i-volume")
 
     def test_cancel_export_task(self):
         self.set_http_response(status_code=200)

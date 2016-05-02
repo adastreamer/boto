@@ -546,7 +546,7 @@ class ELBConnection(AWSQueryConnection):
         params = {'LoadBalancerName': lb_name,
                   'PolicyName': policy_name,
                   'PolicyTypeName': policy_type}
-        for index, (name, value) in enumerate(policy_attributes.iteritems(), 1):
+        for index, (name, value) in enumerate(iter(policy_attributes.items()), 1):
             params['PolicyAttributes.member.%d.AttributeName' % index] = name
             params['PolicyAttributes.member.%d.AttributeValue' % index] = value
         else:

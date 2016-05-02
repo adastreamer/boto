@@ -42,44 +42,44 @@ class TestRoute53Zone(unittest.TestCase):
     def test_a(self):
         self.zone.add_a('example.com', '102.11.23.1', 80)
         record = self.zone.get_a('example.com')
-        self.assertEquals(record.name, u'example.com.')
-        self.assertEquals(record.resource_records, [u'102.11.23.1'])
-        self.assertEquals(record.ttl, u'80')
+        self.assertEqual(record.name, 'example.com.')
+        self.assertEqual(record.resource_records, ['102.11.23.1'])
+        self.assertEqual(record.ttl, '80')
         self.zone.update_a('example.com', '186.143.32.2', '800')
         record = self.zone.get_a('example.com')
-        self.assertEquals(record.name, u'example.com.')
-        self.assertEquals(record.resource_records, [u'186.143.32.2'])
-        self.assertEquals(record.ttl, u'800')
+        self.assertEqual(record.name, 'example.com.')
+        self.assertEqual(record.resource_records, ['186.143.32.2'])
+        self.assertEqual(record.ttl, '800')
 
     def test_cname(self):
         self.zone.add_cname('www.example.com', 'webserver.example.com', 200)
         record = self.zone.get_cname('www.example.com')
-        self.assertEquals(record.name, u'www.example.com.')
-        self.assertEquals(record.resource_records, [u'webserver.example.com.'])
-        self.assertEquals(record.ttl, u'200')
+        self.assertEqual(record.name, 'www.example.com.')
+        self.assertEqual(record.resource_records, ['webserver.example.com.'])
+        self.assertEqual(record.ttl, '200')
         self.zone.update_cname('www.example.com', 'web.example.com', 45)
         record = self.zone.get_cname('www.example.com')
-        self.assertEquals(record.name, u'www.example.com.')
-        self.assertEquals(record.resource_records, [u'web.example.com.'])
-        self.assertEquals(record.ttl, u'45')
+        self.assertEqual(record.name, 'www.example.com.')
+        self.assertEqual(record.resource_records, ['web.example.com.'])
+        self.assertEqual(record.ttl, '45')
 
     def test_mx(self):
         self.zone.add_mx('example.com',
                          ['10 mx1.example.com', '20 mx2.example.com'],
                          1000)
         record = self.zone.get_mx('example.com')
-        self.assertEquals(set(record.resource_records),
-                          set([u'10 mx1.example.com.',
-                               u'20 mx2.example.com.']))
-        self.assertEquals(record.ttl, u'1000')
+        self.assertEqual(set(record.resource_records),
+                          set(['10 mx1.example.com.',
+                               '20 mx2.example.com.']))
+        self.assertEqual(record.ttl, '1000')
         self.zone.update_mx('example.com',
                             ['10 mail1.example.com', '20 mail2.example.com'],
                             50)
         record = self.zone.get_mx('example.com')
-        self.assertEquals(set(record.resource_records),
-                          set([u'10 mail1.example.com.',
+        self.assertEqual(set(record.resource_records),
+                          set(['10 mail1.example.com.',
                                '20 mail2.example.com.']))
-        self.assertEquals(record.ttl, u'50')
+        self.assertEqual(record.ttl, '50')
 
     def test_get_records(self):
         self.zone.get_records()
@@ -97,7 +97,7 @@ class TestRoute53Zone(unittest.TestCase):
         self.zone.add_a('wrr.example.com', '5.6.7.8',
                         identifier=('bar', '10'))
         wrrs = self.zone.find_records('wrr.example.com', 'A', all=True)
-        self.assertEquals(len(wrrs), 2)
+        self.assertEqual(len(wrrs), 2)
         self.zone.delete_a('wrr.example.com', all=True)
 
     def test_identifiers_lbrs(self):
@@ -106,7 +106,7 @@ class TestRoute53Zone(unittest.TestCase):
         self.zone.add_a('lbr.example.com', '8.7.6.5',
                         identifier=('bam', 'us-west-1'))
         lbrs = self.zone.find_records('lbr.example.com', 'A', all=True)
-        self.assertEquals(len(lbrs), 2)
+        self.assertEqual(len(lbrs), 2)
         self.zone.delete_a('lbr.example.com',
                       identifier=('bam', 'us-west-1'))
         self.zone.delete_a('lbr.example.com',

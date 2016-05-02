@@ -362,7 +362,7 @@ class Table(object):
         """
         raw_key = {}
 
-        for key, value in keys.items():
+        for key, value in list(keys.items()):
             raw_key[key] = self._dynamizer.encode(value)
 
         return raw_key
@@ -592,7 +592,7 @@ class Table(object):
         """
         filters = {}
 
-        for field_and_op, value in filter_kwargs.items():
+        for field_and_op, value in list(filter_kwargs.items()):
             field_bits = field_and_op.split('__')
             fieldname = '__'.join(field_bits[:-1])
 
@@ -813,7 +813,7 @@ class Table(object):
         if exclusive_start_key:
             kwargs['exclusive_start_key'] = {}
 
-            for key, value in exclusive_start_key.items():
+            for key, value in list(exclusive_start_key.items()):
                 kwargs['exclusive_start_key'][key] = \
                     self._dynamizer.encode(value)
 
@@ -840,7 +840,7 @@ class Table(object):
         if raw_results.get('LastEvaluatedKey', None):
             last_key = {}
 
-            for key, value in raw_results['LastEvaluatedKey'].items():
+            for key, value in list(raw_results['LastEvaluatedKey'].items()):
                 last_key[key] = self._dynamizer.decode(value)
 
         return {
@@ -916,7 +916,7 @@ class Table(object):
         if exclusive_start_key:
             kwargs['exclusive_start_key'] = {}
 
-            for key, value in exclusive_start_key.items():
+            for key, value in list(exclusive_start_key.items()):
                 kwargs['exclusive_start_key'][key] = \
                     self._dynamizer.encode(value)
 
@@ -943,7 +943,7 @@ class Table(object):
         if raw_results.get('LastEvaluatedKey', None):
             last_key = {}
 
-            for key, value in raw_results['LastEvaluatedKey'].items():
+            for key, value in list(raw_results['LastEvaluatedKey'].items()):
                 last_key[key] = self._dynamizer.decode(value)
 
         return {
@@ -1008,7 +1008,7 @@ class Table(object):
         for key_data in keys:
             raw_key = {}
 
-            for key, value in key_data.items():
+            for key, value in list(key_data.items()):
                 raw_key[key] = self._dynamizer.encode(value)
 
             items[self.table_name]['Keys'].append(raw_key)
@@ -1029,7 +1029,7 @@ class Table(object):
         for raw_key in raw_unproccessed.get('Keys', []):
             py_key = {}
 
-            for key, value in raw_key.items():
+            for key, value in list(raw_key.items()):
                 py_key[key] = self._dynamizer.decode(value)
 
             unprocessed_keys.append(py_key)

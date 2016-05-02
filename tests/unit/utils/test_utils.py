@@ -37,17 +37,17 @@ class TestPassword(unittest.TestCase):
     def clstest(self, cls):
         """Insure that password.__eq__ hashes test value before compare."""
         password = cls('foo')
-        self.assertNotEquals(password, 'foo')
+        self.assertNotEqual(password, 'foo')
 
         password.set('foo')
         hashed = str(password)
-        self.assertEquals(password, 'foo')
-        self.assertEquals(password.str, hashed)
+        self.assertEqual(password, 'foo')
+        self.assertEqual(password.str, hashed)
 
         password = cls(hashed)
-        self.assertNotEquals(password.str, 'foo')
-        self.assertEquals(password, 'foo')
-        self.assertEquals(password.str, hashed)
+        self.assertNotEqual(password.str, 'foo')
+        self.assertEqual(password, 'foo')
+        self.assertEqual(password.str, hashed)
 
     def test_aaa_version_1_9_default_behavior(self):
         self.clstest(Password)
@@ -58,7 +58,7 @@ class TestPassword(unittest.TestCase):
 
         password = SHA224Password()
         password.set('foo')
-        self.assertEquals(hashlib.sha224('foo').hexdigest(), str(password))
+        self.assertEqual(hashlib.sha224('foo').hexdigest(), str(password))
 
     def test_hmac(self):
         def hmac_hashfunc(cls, msg):
@@ -71,7 +71,7 @@ class TestPassword(unittest.TestCase):
         password = HMACPassword()
         password.set('foo')
 
-        self.assertEquals(str(password),
+        self.assertEqual(str(password),
                           hmac.new('mysecretkey', 'foo').hexdigest())
 
     def test_constructor(self):
@@ -79,7 +79,7 @@ class TestPassword(unittest.TestCase):
 
         password = Password(hashfunc=hmac_hashfunc)
         password.set('foo')
-        self.assertEquals(password.str,
+        self.assertEqual(password.str,
                           hmac.new('mysecretkey', 'foo').hexdigest())
 
 

@@ -265,13 +265,13 @@ class CloudWatchConnectionTest(unittest.TestCase):
 
         c.make_request = make_request
         alarms = c.describe_alarms()
-        self.assertEquals(alarms.next_token, 'mynexttoken')
-        self.assertEquals(alarms[0].name, 'FancyAlarm')
-        self.assertEquals(alarms[0].comparison, '<')
-        self.assertEquals(alarms[0].dimensions, {u'Job': [u'ANiceCronJob']})
-        self.assertEquals(alarms[1].name, 'SuperFancyAlarm')
-        self.assertEquals(alarms[1].comparison, '>')
-        self.assertEquals(alarms[1].dimensions, {u'Job': [u'ABadCronJob']})
+        self.assertEqual(alarms.next_token, 'mynexttoken')
+        self.assertEqual(alarms[0].name, 'FancyAlarm')
+        self.assertEqual(alarms[0].comparison, '<')
+        self.assertEqual(alarms[0].dimensions, {'Job': ['ANiceCronJob']})
+        self.assertEqual(alarms[1].name, 'SuperFancyAlarm')
+        self.assertEqual(alarms[1].comparison, '>')
+        self.assertEqual(alarms[1].dimensions, {'Job': ['ABadCronJob']})
 
 if __name__ == '__main__':
     unittest.main()
